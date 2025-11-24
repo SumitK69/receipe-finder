@@ -1,5 +1,10 @@
 pipeline {
-  agent { docker { image 'node:20-alpine' args '-u root:root' } }
+  agent {
+    docker {
+      image 'node:20-alpine'
+      args '-u root:root'
+    }
+  }
 
   environment {
     IMAGE_NAME = "${IMAGE_NAME ?: 'recipe-finder'}"
@@ -9,7 +14,6 @@ pipeline {
   }
 
   options {
-    timestamps()
     buildDiscarder(logRotator(numToKeepStr: '10'))
   }
 
