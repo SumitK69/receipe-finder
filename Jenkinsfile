@@ -48,33 +48,11 @@ pipeline {
         archiveArtifacts artifacts: 'dist/**', fingerprint: true
       }
     }
-
-    stage('Docker: Build & Push') {
-      when {
-        expression { return env.DO_PUSH == 'true' && env.DOCKER_REGISTRY }
-      }
-      steps {
-        script {
-          def shortCommit = (env.GIT_COMMIT ?: 'local').take(7)
-          def tag = "${env.BUILD_NUMBER}-${shortCommit}"
-          def fullImage = "${env.DOCKER_REGISTRY}/${env.IMAGE_NAME}:${tag}"
-
-          sh "docker build -t ${fullImage} ."
-
-          withCredentials([usernamePassword(credentialsId: env.DOCKER_CREDENTIALS_ID, usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-            sh "echo $DOCKER_PASS | docker login ${env.DOCKER_REGISTRY} -u $DOCKER_USER --password-stdin"
-            sh "docker push ${fullImage}"
-          }
-
-          echo "Pushed image: ${fullImage}"
-        }
-      }
-    }
   }
 
   post {
     always {
-      cleanWs()
+      deleteDir()
     }
     success {
       echo 'Build succeeded.'
