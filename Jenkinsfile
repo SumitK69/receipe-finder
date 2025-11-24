@@ -243,17 +243,17 @@ spec:
     stages {
 
         stage('Install + Build Frontend') {
-            when {
-                anyOf {
-                    changeset "src/**"
-                    changeset "package*.json"
-                    changeset "vite.config.js"
-                    changeset "index.html"
-                    changeset "tailwind.config.*"
-                    changeset "postcss.config.*"
-                    expression { return currentBuild.number == 1 }
-                }
-            }
+            // when {
+            //     anyOf {
+            //         changeset "src/**"
+            //         changeset "package*.json"
+            //         changeset "vite.config.js"
+            //         changeset "index.html"
+            //         changeset "tailwind.config.*"
+            //         changeset "postcss.config.*"
+            //         expression { return currentBuild.number == 1 }
+            //     }
+            // }
             steps {
                 container('node') {
                     sh '''
@@ -265,16 +265,16 @@ spec:
         }
 
         stage('Build Docker Image') {
-            when {
-                anyOf {
-                    changeset "Dockerfile"
-                    changeset "docker-compose.yml"
-                    changeset "src/**"
-                    changeset "package*.json"
-                    changeset "dist/**"
-                    expression { return currentBuild.number == 1 }
-                }
-            }
+            // when {
+            //     anyOf {
+            //         changeset "Dockerfile"
+            //         changeset "docker-compose.yml"
+            //         changeset "src/**"
+            //         changeset "package*.json"
+            //         changeset "dist/**"
+            //         expression { return currentBuild.number == 1 }
+            //     }
+            // }
             steps {
                 container('dind') {
                     sh '''
@@ -300,15 +300,15 @@ spec:
         }
 
         stage('Login to Nexus Registry') {
-            when {
-                anyOf {
-                    changeset "Dockerfile"
-                    changeset "src/**"
-                    changeset "package*.json"
-                    changeset "dist/**"
-                    expression { return currentBuild.number == 1 }
-                }
-            }
+            // when {
+            //     anyOf {
+            //         changeset "Dockerfile"
+            //         changeset "src/**"
+            //         changeset "package*.json"
+            //         changeset "dist/**"
+            //         expression { return currentBuild.number == 1 }
+            //     }
+            // }
             steps {
                 container('dind') {
                     sh '''
@@ -319,15 +319,15 @@ spec:
         }
 
         stage('Push to Nexus') {
-            when {
-                anyOf {
-                    changeset "Dockerfile"
-                    changeset "src/**"
-                    changeset "package*.json"
-                    changeset "dist/**"
-                    expression { return currentBuild.number == 1 }
-                }
-            }
+            // when {
+            //     anyOf {
+            //         changeset "Dockerfile"
+            //         changeset "src/**"
+            //         changeset "package*.json"
+            //         changeset "dist/**"
+            //         expression { return currentBuild.number == 1 }
+            //     }
+            // }
             steps {
                 container('dind') {
                     sh '''
@@ -339,14 +339,14 @@ spec:
         }
 
         stage('Deploy to Kubernetes') {
-            when {
-                anyOf {
-                    changeset "k8s/**"
-                    changeset "Dockerfile"
-                    changeset "src/**"
-                    expression { return currentBuild.number == 1 }
-                }
-            }
+            // when {
+            //     anyOf {
+            //         changeset "k8s/**"
+            //         changeset "Dockerfile"
+            //         changeset "src/**"
+            //         expression { return currentBuild.number == 1 }
+            //     }
+            // }
             steps {
                 container('kubectl') {
                     sh '''
