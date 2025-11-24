@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recipe-finder-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recipe-finder
+  template:
+    metadata:
+      labels:
+        app: recipe-finder
+    spec:
+      containers:
+      - name: recipe-finder
+        # IMPORTANT: Replace this with the full URL to your image in the Nexus repository if it differs
+        image: nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401199/recipe-finder:v1
+        ports:
+        # The port your application container is listening on. Adjust if your app uses a different port.
+        - containerPort: 80
