@@ -299,6 +299,15 @@ spec:
         }
 
         stage('Login to Nexus Registry') {
+            when {
+                anyOf {
+                    changeset "Dockerfile"
+                    changeset "src/**"
+                    changeset "package*.json"
+                    changeset "dist/**"
+                    expression { return currentBuild.number == 1 }
+                }
+            }
             steps {
                 container('dind') {
                     sh '''
@@ -309,10 +318,19 @@ spec:
         }
 
         stage('Push to Nexus') {
+            when {
+                anyOf {
+                    changeset "Dockerfile"
+                    changeset "src/**"
+                    changeset "package*.json"
+                    changeset "dist/**"
+                    expression { return currentBuild.number == 1 }
+                }
+            }
             steps {
                 container('dind') {
                     sh '''
-                        docker tag receipe-nutrition-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
+                        docker tag receipe-nutrition-finder:latest nexusx-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
                         docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
                     '''
                 }
