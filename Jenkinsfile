@@ -156,12 +156,19 @@ spec:
             steps {
                 container('kubectl') {
                     sh '''
-                        set -x
-                        kubectl version
-                        kubectl config view
-                        kubectl apply -f k8s/deployment.yaml -n 2401102
-                        kubectl apply -f k8s/service.yaml -n 2401102
-                        kubectl get all -n 2401102
+                        # Create or update the image pull secret in the cluster
+                        kubectl create secret docker-registry nexus-secret \
+                          --namespace=2401102 \
+                          --docker-server=nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085 \
+                          --docker-username=admin \
+                          --docker-password=Changeme@2025 \
+                          --docker-email=sumit.khobragade.mca24@mespune.in \
+                          --dry-run=client -o yaml | kubectl apply -f -
+
+                        # Apply the deployment and service
+                        kubectl apply -f k8s/deployment.yaml
+                        
+                        # Wait for the deployment to be successful
                         kubectl rollout status deployment/receipe-nutrition-finder-deployment -n 2401102
                     '''
                 }
