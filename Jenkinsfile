@@ -272,7 +272,7 @@ spec:
                             -Dsonar.projectKey=2401102-sumit \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://my-sonarqube-sonarqube.sonarqube.svc.cluster.local:9000 \
-                            -Dsonar.login=ssqu_b404278daa6eff3dff1d2e145f3fdde9c965004a
+                            -Dsonar.token=ssqu_b404278daa6eff3dff1d2e145f3fdde9c965004a
                     '''
                 }
             }
