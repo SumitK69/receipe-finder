@@ -243,6 +243,17 @@ spec:
     stages {
 
         stage('Install + Build Frontend') {
+            when {
+                anyOf {
+                    changeset "src/**"
+                    changeset "package*.json"
+                    changeset "vite.config.js"
+                    changeset "index.html"
+                    changeset "tailwind.config.*"
+                    changeset "postcss.config.*"
+                    expression { return currentBuild.number == 1 }
+                }
+            }
             steps {
                 container('node') {
                     sh '''
@@ -254,6 +265,15 @@ spec:
         }
 
         stage('Build Docker Image') {
+            when {
+                anyOf {
+                    changeset "Dockerfile"
+                    changeset "src/**"
+                    changeset "package*.json"
+                    changeset "dist/**"
+                    expression { return currentBuild.number == 1 }
+                }
+            }
             steps {
                 container('dind') {
                     sh '''
@@ -269,7 +289,7 @@ spec:
                 container('sonar-scanner') {
                     sh '''
                         sonar-scanner \
-                            -Dsonar.projectKey=2401102-sumit \
+                            -Dsonar.projectKey=receipe-nutrition-finder \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://my-sonarqube-sonarqube.sonarqube.svc.cluster.local:9000 \
                             -Dsonar.token=sqp_220f805a7b6c80a326c0a631a64603c65edda39b
@@ -300,6 +320,14 @@ spec:
         }
 
         stage('Deploy to Kubernetes') {
+            when {
+                anyOf {
+                    changeset "k8s/**"
+                    changeset "Dockerfile"
+                    changeset "src/**"
+                    expression { return currentBuild.number == 1 }
+                }
+            }
             steps {
                 container('kubectl') {
                     sh '''
