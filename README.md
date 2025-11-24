@@ -29,7 +29,7 @@ Frontend/
 
 ## 📍 Live Site
 
-[Visit Recipe Finder](https://recipe-finder-six-eta.vercel.app/)
+[Visit Recipe Finder](https://receipe-nutrition-finder-six-eta.vercel.app/)
 
 
 "# receipe-nutrition-finder"
