@@ -106,29 +106,6 @@ spec:
             }
         }
 
-        stage('Login to Docker Hub') {
-            steps {
-                container('dind') {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh '''
-                            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        '''
-                    }
-                }
-            }
-        }
-
-        stage('Push to Docker Hub') {
-            steps {
-                container('dind') {
-                    sh '''
-                        docker push sumitk69/receipe-nutrition-finder:latest
-                        docker push sumitk69/receipe-nutrition-finder:v${BUILD_NUMBER}
-                    '''
-                }
-            }
-        }
-
         stage('Login to Nexus Registry') {
             // when {
             //     anyOf {
