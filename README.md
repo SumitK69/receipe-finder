@@ -4,20 +4,20 @@ A responsive and modern web app that allows users to discover recipes based on i
 
 ## 🚀 Tech Stack
 
-* **Frontend:** React, Vite, Tailwind CSS
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB
-* **API:** Spoonacular API
-* **State Management:** React Hooks (`useState`, `useEffect`)
-* **Hosting:** Vercel (Frontend), Render/Backend
+- **Frontend:** React, Vite, Tailwind CSS
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+- **API:** Spoonacular API
+- **State Management:** React Hooks (`useState`, `useEffect`)
+- **Hosting:** Vercel (Frontend), Render/Backend
 
 ## 🔍 Features
 
-* Search recipes by ingredients
-* Search by nutrients (calories, carbs, fats, proteins)
-* Responsive card-based layout
-* Clean, purple-white themed UI
-* Animated transitions and interactive elements
+- Search recipes by ingredients
+- Search by nutrients (calories, carbs, fats, proteins)
+- Responsive card-based layout
+- Clean, purple-white themed UI
+- Animated transitions and interactive elements
 
 ## 📂 Folder Structure
 
@@ -32,4 +32,5 @@ Frontend/
 [Visit Recipe Finder](https://recipe-finder-six-eta.vercel.app/)
 
 
-"# receipe-finder" 
+"# receipe-nutrition-finder"
+```

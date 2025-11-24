@@ -23,7 +23,7 @@
 // //         checkout([
 // //           $class: 'GitSCM',
 // //           branches: [[name: '*/main']],
-// //           userRemoteConfigs: [[url: 'https://github.com/SumitK69/receipe-finder.git']]
+// //           userRemoteConfigs: [[url: 'https://github.com/SumitK69/receipe-nutrition-finder.git']]
 // //         ])
 // //       }
 // //     }
@@ -278,7 +278,7 @@ spec:
                 container('dind') {
                     sh '''
                         sleep 10
-                        docker build -t recipe-finder:latest .
+                        docker build -t receipe-nutrition-finder:latest .
                     '''
                 }
             }
@@ -312,8 +312,8 @@ spec:
             steps {
                 container('dind') {
                     sh '''
-                        docker tag recipe-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
-                        docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
+                        docker tag receipe-nutrition-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
+                        docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
                     '''
                 }
             }
@@ -337,7 +337,7 @@ spec:
                         kubectl apply -f k8s/deployment.yaml -n 2401102
                         kubectl apply -f k8s/service.yaml -n 2401102
                         kubectl get all -n 2401102
-                        kubectl rollout status deployment/recipe-finder-deployment -n 2401102
+                        kubectl rollout status deployment/receipe-nutrition-finder-deployment -n 2401102
                     '''
                 }
             }
