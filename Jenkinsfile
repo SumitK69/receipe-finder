@@ -162,12 +162,25 @@ spec:
                           --docker-server=nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085 \
                           --docker-username=admin \
                           --docker-password=Changeme@2025 \
-                          --docker-email=sumit.khobragade.mca24@mespune.in \
+                          --docker-email=user@example.com \
                           --dry-run=client -o yaml | kubectl apply -f -
 
                         # Apply the deployment and service
                         kubectl apply -f k8s/deployment.yaml
                         
+                        # Wait for pod to be created and get detailed events
+                        echo "--- Waiting for pod to generate events ---"
+                        sleep 15
+                        
+                        echo "--- Describing Pod for debugging ---"
+                        POD_NAME=$(kubectl get pods -n 2401102 -l app=receipe-nutrition-finder -o jsonpath='{.items[0].metadata.name}' || echo "pod-not-found")
+                        if [ "$POD_NAME" != "pod-not-found" ]; then
+                          kubectl describe pod $POD_NAME -n 2401102
+                        else
+                          echo "Could not find a pod to describe."
+                        fi
+                        echo "--- End of Pod Description ---"
+
                         # Wait for the deployment to be successful
                         kubectl rollout status deployment/receipe-nutrition-finder-deployment -n 2401102
                     '''
