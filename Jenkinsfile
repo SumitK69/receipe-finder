@@ -268,6 +268,7 @@ spec:
             when {
                 anyOf {
                     changeset "Dockerfile"
+                    changeset "docker-compose.yml"
                     changeset "src/**"
                     changeset "package*.json"
                     changeset "dist/**"
