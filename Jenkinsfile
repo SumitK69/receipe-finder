@@ -85,8 +85,7 @@ spec:
                 container('dind') {
                     sh '''
                         sleep 10
-                        docker build -t sumitk69/receipe-nutrition-finder:latest .
-                        docker tag sumitk69/receipe-nutrition-finder:latest sumitk69/receipe-nutrition-finder:v${BUILD_NUMBER}
+                        docker build -t receipe-nutrition-finder:latest .
                     '''
                 }
             }
@@ -138,7 +137,7 @@ spec:
             steps {
                 container('dind') {
                     sh '''
-                        docker tag sumitk69/receipe-nutrition-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
+                        docker tag receipe-nutrition-finder:latest nexusx-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
                         docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/receipe-nutrition-finder:v1
                     '''
                 }
