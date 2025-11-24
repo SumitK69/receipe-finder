@@ -18,6 +18,16 @@ pipeline {
   }
 
   stages {
+    stage('Checkout') {
+      steps {
+        checkout([
+          $class: 'GitSCM',
+          branches: [[name: '*/main']],
+          userRemoteConfigs: [[url: 'https://github.com/SumitK69/receipe-finder.git']]
+        ])
+      }
+    }
+
     stage('Install') {
       steps {
         sh 'npm ci'
