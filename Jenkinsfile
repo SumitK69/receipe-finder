@@ -165,8 +165,8 @@
 //             steps {
 //                 container('dind') {
 //                     sh '''
-//                         docker tag recipe-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401199/recipe-finder:v1
-//                         docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401199/recipe-finder:v1
+//                         docker tag recipe-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
+//                         docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
 //                     '''
 //                 }
 //             }
@@ -181,10 +181,10 @@
 //                         ls -la k8s
 //                         kubectl version
 //                         kubectl config view
-//                         kubectl apply -f k8s/deployment.yaml -n 2401199
-//                         kubectl apply -f k8s/service.yaml -n 2401199
-//                         kubectl get all -n 2401199
-//                         kubectl rollout status deployment/recipe-finder-deployment -n 2401199
+//                         kubectl apply -f k8s/deployment.yaml -n 2401102
+//                         kubectl apply -f k8s/service.yaml -n 2401102
+//                         kubectl get all -n 2401102
+//                         kubectl rollout status deployment/recipe-finder-deployment -n 2401102
 //                     '''
 //                 }
 //             }
@@ -269,10 +269,10 @@ spec:
                 container('sonar-scanner') {
                     sh '''
                         sonar-scanner \
-                            -Dsonar.projectKey=2401063-ashutosh \
+                            -Dsonar.projectKey=2401102-sumit \
                             -Dsonar.sources=. \
                             -Dsonar.host.url=http://my-sonarqube-sonarqube.sonarqube.svc.cluster.local:9000 \
-                            -Dsonar.login=sqp_fec0d2cd0d6849ed77e9d26ed8ae79e2a03b2844
+                            -Dsonar.login=ssqu_b404278daa6eff3dff1d2e145f3fdde9c965004a
                     '''
                 }
             }
@@ -292,8 +292,8 @@ spec:
             steps {
                 container('dind') {
                     sh '''
-                        docker tag recipe-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401199/recipe-finder:v1
-                        docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401199/recipe-finder:v1
+                        docker tag recipe-finder:latest nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
+                        docker push nexus-service-for-docker-hosted-registry.nexus.svc.cluster.local:8085/2401102/recipe-finder:v1
                     '''
                 }
             }
@@ -306,10 +306,10 @@ spec:
                         set -x
                         kubectl version
                         kubectl config view
-                        kubectl apply -f k8s/deployment.yaml -n 2401199
-                        kubectl apply -f k8s/service.yaml -n 2401199
-                        kubectl get all -n 2401199
-                        kubectl rollout status deployment/recipe-finder-deployment -n 2401199
+                        kubectl apply -f k8s/deployment.yaml -n 2401102
+                        kubectl apply -f k8s/service.yaml -n 2401102
+                        kubectl get all -n 2401102
+                        kubectl rollout status deployment/recipe-finder-deployment -n 2401102
                     '''
                 }
             }

@@ -12,6 +12,8 @@ spec:
       labels:
         app: recipe-finder
     spec:
+      imagePullSecrets:
+      - name: nexus-creds
       containers:
       - name: recipe-finder
         # IMPORTANT: Replace this with the full URL to your image in the Nexus repository if it differs
