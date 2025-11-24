@@ -18,12 +18,6 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
-    }
-
     stage('Install') {
       steps {
         sh 'npm ci'
@@ -51,9 +45,6 @@ pipeline {
   }
 
   post {
-    always {
-      deleteDir()
-    }
     success {
       echo 'Build succeeded.'
     }
